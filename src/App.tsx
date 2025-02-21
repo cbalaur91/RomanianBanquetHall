@@ -244,7 +244,7 @@ function App() {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url("/images/SalaMare/7.JPG")',
+            backgroundImage: 'url("/images/SalaMare/3.JPG")',
           }}
           role="img"
           aria-label="Elegant banquet hall interior"
@@ -275,7 +275,7 @@ function App() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <img 
-                src="/images/SalaMare/8.JPG"
+                src="/images/SalaMare/4.JPG"
                 alt="Banquet hall interior"
                 loading="lazy"
                 className="rounded-lg shadow-xl"
@@ -320,12 +320,12 @@ function App() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                "/images/SalaMare/1.JPG",
-                "/images/SalaMare/2.JPG",
-                "/images/SalaMare/3.JPG",
-                "/images/SalaMare/4.JPG",
                 "/images/SalaMare/5.JPG",
-                "/images/SalaMare/6.JPG"
+                "/images/SalaMare/6.JPG",
+                "/images/SalaMare/7.JPG",
+                "/images/SalaMare/8.JPG",
+                "/images/SalaMare/9.JPG",
+                "/images/SalaMare/14.JPG"
               ].map((url, index) => (
                 <div key={index} className="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg shadow-lg">
                   <img 
@@ -383,8 +383,8 @@ function App() {
             Check Availability
           </h2>
           <div className="grid md:grid-cols-2 gap-12">
-            {renderCalendar('Grand Hall')}
-            {renderCalendar('Elegant Hall')}
+            {renderCalendar('Grand Ballroom')}
+            {renderCalendar('Chateau Hall')}
           </div>
           
           <div className="text-center mt-12">
@@ -410,7 +410,7 @@ function App() {
               {
                 title: "Weddings",
                 description: "Make your special day unforgettable in our elegant venue with comprehensive wedding packages.",
-                image: "/images/SalaMare/1.JPG"
+                image: "/images/SalaMare/15.JPG"
               },
               {
                 title: "Corporate Events",

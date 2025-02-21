@@ -23,6 +23,7 @@ const BOOKED_DATES = {
   //   1: [1, 15],    // January 2025
   //   12: [24, 25]   // December 2025
   // }
+    2: [22]
   },
   
   // Elegant Hall bookings

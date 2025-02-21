@@ -243,7 +243,7 @@ function App() {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80")',
+            backgroundImage: 'url("/images/SalaMare/7.JPG")',
           }}
           role="img"
           aria-label="Elegant banquet hall interior"
@@ -274,7 +274,7 @@ function App() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <img 
-                src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+                src="/images/SalaMare/8.JPG"
                 alt="Banquet hall interior"
                 loading="lazy"
                 className="rounded-lg shadow-xl"
@@ -314,17 +314,17 @@ function App() {
           {/* Grand Hall */}
           <div className="mb-20">
             <div className="text-center mb-12">
-              <h3 className="text-2xl md:text-3xl font-serif mb-4">Grand Hall</h3>
+              <h3 className="text-2xl md:text-3xl font-serif mb-4">Grand Ballroom</h3>
               <p className="text-xl text-gray-300">Capacity up to 450 guests</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                "https://images.unsplash.com/photo-1519167758481-83f550bb49b3",
-                "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3",
-                "https://images.unsplash.com/photo-1527529482837-4698179dc6ce",
-                "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8",
-                "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3",
-                "https://images.unsplash.com/photo-1519225421980-715cb0215aed"
+                "/images/SalaMare/1.JPG",
+                "/images/SalaMare/2.JPG",
+                "/images/SalaMare/3.JPG",
+                "/images/SalaMare/4.JPG",
+                "/images/SalaMare/5.JPG",
+                "/images/SalaMare/6.JPG"
               ].map((url, index) => (
                 <div key={index} className="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg shadow-lg">
                   <img 
@@ -345,17 +345,17 @@ function App() {
           {/* Elegant Hall */}
           <div>
             <div className="text-center mb-12">
-              <h3 className="text-2xl md:text-3xl font-serif mb-4">Elegant Hall</h3>
+              <h3 className="text-2xl md:text-3xl font-serif mb-4">Chateau Hall</h3>
               <p className="text-xl text-gray-300">Capacity up to 150 guests</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                "https://images.unsplash.com/photo-1507504031003-b417219a0fde",
-                "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3",
-                "https://images.unsplash.com/photo-1505236858219-8359eb29e329",
-                "https://images.unsplash.com/photo-1519225421980-715cb0215aed",
-                "https://images.unsplash.com/photo-1511578314322-379afb476865",
-                "https://images.unsplash.com/photo-1517722014278-c256a91a6fba"
+                "/images/SalaMica/1.JPG",
+                "/images/SalaMica/2.JPG",
+                "/images/SalaMica/3.JPG",
+                "/images/SalaMica/18.jpg",
+                "/images/SalaMica/5.JPG",
+                "/images/SalaMica/8.JPG"
               ].map((url, index) => (
                 <div key={index} className="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg shadow-lg">
                   <img 
@@ -409,17 +409,17 @@ function App() {
               {
                 title: "Weddings",
                 description: "Make your special day unforgettable in our elegant venue with comprehensive wedding packages.",
-                image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80"
+                image: "/images/SalaMare/1.JPG"
               },
               {
                 title: "Corporate Events",
                 description: "Professional atmosphere for your business meetings, conferences, and corporate celebrations.",
-                image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80"
+                image: "/images/SalaMica/17.jpg"
               },
               {
                 title: "Private Parties",
                 description: "Perfect setting for birthdays, anniversaries, and other special celebrations.",
-                image: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=800&q=80"
+                image: "/images/SalaMica/12.JPG"
               }
             ].map((service, index) => (
               <div key={index} className="bg-warmGray-900 rounded-lg overflow-hidden shadow-xl hover:shadow-gold/20 transition-shadow">

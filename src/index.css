@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-gray-900 text-white;
+  }
+}
+
+@layer components {
+  .text-gold {
+    color: #E5B45B;
+  }
+  
+  .bg-gold {
+    background-color: #E5B45B;
+  }
+
+  .bg-gradient-warm {
+    background: linear-gradient(to right, #1C1917, #292524);
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(circle at center, #292524, #1C1917);
+  }
+}
+
+.aspect-w-16 {
+  position: relative;
+  padding-bottom: 56.25%;
+}
+
+.aspect-w-16 > * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

@@ -11,7 +11,7 @@ import emailjs from '@emailjs/browser';
 
 const BOOKED_DATES = {
   // Grand Hall bookings
-  grandHall: {
+  grandBallroom: {
     // Format: { month: [dates] }
     // Example: 
     // 3: [1, 15, 30],  // March
@@ -23,11 +23,13 @@ const BOOKED_DATES = {
   //   1: [1, 15],    // January 2025
   //   12: [24, 25]   // December 2025
   // }
-    2: [22, 23]
+    2025: {
+      2: [22, 23]
+    }
   },
   
   // Elegant Hall bookings
-  elegantHall: {
+  chateauHall: {
     // Format: { month: [dates] }
     // Example:
     // 3: [10, 25],     // March 2024
@@ -37,6 +39,7 @@ const BOOKED_DATES = {
     //   1: [1, 15],    // January 2025
     //   12: [24, 25]   // December 2025
     // }
+    2: [23]
   }
 };
 
@@ -84,15 +87,15 @@ function App() {
 
   const getBookedDatesForMonth = (hallName: string, month: number): number[] => {
     const year = currentDate.getFullYear();
-    const hall = hallName === 'Grand Hall' ? BOOKED_DATES.grandHall : BOOKED_DATES.elegantHall;
+    const hall = hallName === 'Grand Ballroom' ? BOOKED_DATES.grandBallroom : BOOKED_DATES.chateauHall;
     
-    // Check if we have bookings for the current year
-    if (year === new Date().getFullYear()) {
-      return hall[month + 1] || []; // Current year format
+    // Always check the year-based format first
+    if (hall[year]?.[month + 1]) {
+      return hall[year][month + 1];
     }
     
-    // Check future years format
-    return hall[year]?.[month + 1] || [];
+    // Fallback to old format
+    return hall[month + 1] || [];
   };
 
   const renderCalendar = (hallName: string) => {

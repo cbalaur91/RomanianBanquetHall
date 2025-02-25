@@ -572,7 +572,7 @@ function App() {
       {/* Footer */}
       <footer className="bg-warmGray-900 py-8" role="contentinfo">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>&copy; {new Date().getFullYear()} Romanian Banquet Hall. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Powered by AiWebHub.</p>
         </div>
       </footer>
     </div>

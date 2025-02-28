@@ -24,7 +24,9 @@ const BOOKED_DATES = {
   //   12: [24, 25]   // December 2025
   // }
     2025: {
-      2: [22, 23]
+      6: [7, 14],
+      8: [30],
+      10: [4]
     }
   },
   
@@ -39,7 +41,10 @@ const BOOKED_DATES = {
     //   1: [1, 15],    // January 2025
     //   12: [24, 25]   // December 2025
     // }
-    2: [23]
+    3: [1],
+    5: [10, 31],
+    6: [7, 14],
+    7: [26]
   }
 };
 
@@ -102,6 +107,9 @@ function App() {
     const daysInMonth = getDaysInMonth(currentDate);
     const firstDay = getFirstDayOfMonth(currentDate);
     const bookedDates = getBookedDatesForMonth(hallName, currentDate.getMonth());
+    const today = new Date();
+    const isCurrentMonth = today.getFullYear() === currentDate.getFullYear() && today.getMonth() === currentDate.getMonth();
+
     const days = Array.from({ length: 42 }, (_, i) => {
       const day = i - firstDay + 1;
       return day > 0 && day <= daysInMonth ? day : null;
@@ -164,6 +172,7 @@ function App() {
                     ? 'bg-gray-800 hover:bg-gold hover:text-black cursor-pointer transition-colors'
                     : ''
                 }
+                ${isCurrentMonth && day === today.getDate() ? 'border-2 border-gold' : ''}
               `}
               onClick={() => day && !bookedDates.includes(day) && handleDateClick(day, hallName)}
             >

@@ -1,0 +1,320 @@
+/* ========================================
+   Romanian Banquet Hall - Animations
+   Refined, subtle motion design
+   ======================================== */
+
+/* Base animation timings */
+:root {
+  --animation-duration-fast: 200ms;
+  --animation-duration-normal: 300ms;
+  --animation-duration-slow: 500ms;
+  --animation-duration-slower: 700ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ----------------------------------------
+   Fade In Animations
+   ---------------------------------------- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ----------------------------------------
+   Staggered entrance for lists
+   ---------------------------------------- */
+
+.stagger-children > * {
+  opacity: 0;
+  animation: fadeInUp var(--animation-duration-slow) var(--ease-out-expo) forwards;
+}
+
+.stagger-children.visible > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children.visible > *:nth-child(2) { animation-delay: 75ms; }
+.stagger-children.visible > *:nth-child(3) { animation-delay: 150ms; }
+.stagger-children.visible > *:nth-child(4) { animation-delay: 225ms; }
+.stagger-children.visible > *:nth-child(5) { animation-delay: 300ms; }
+.stagger-children.visible > *:nth-child(6) { animation-delay: 375ms; }
+
+/* ----------------------------------------
+   Hero Animations
+   ---------------------------------------- */
+
+@keyframes heroTextReveal {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.hero-title {
+  animation: heroTextReveal 800ms var(--ease-out-expo) forwards;
+  animation-delay: 200ms;
+  opacity: 0;
+}
+
+.hero-subtitle {
+  animation: heroTextReveal 800ms var(--ease-out-expo) forwards;
+  animation-delay: 400ms;
+  opacity: 0;
+}
+
+.hero-cta {
+  animation: heroTextReveal 800ms var(--ease-out-expo) forwards;
+  animation-delay: 600ms;
+  opacity: 0;
+}
+
+/* Gentle bounce for scroll indicator */
+@keyframes gentleBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.scroll-indicator {
+  animation: gentleBounce 2s ease-in-out infinite;
+}
+
+/* ----------------------------------------
+   Section Reveal Animations
+   ---------------------------------------- */
+
+.section-animate {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity var(--animation-duration-slower) var(--ease-out-expo),
+    transform var(--animation-duration-slower) var(--ease-out-expo);
+}
+
+.section-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ----------------------------------------
+   Lightbox Animations
+   ---------------------------------------- */
+
+@keyframes lightboxBackdrop {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+}
+
+@keyframes lightboxImage {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.lightbox-backdrop {
+  animation: lightboxBackdrop var(--animation-duration-normal) var(--ease-out-quart) forwards;
+}
+
+.lightbox-image {
+  animation: lightboxImage var(--animation-duration-normal) var(--ease-out-expo) forwards;
+}
+
+/* ----------------------------------------
+   Navigation Animations
+   ---------------------------------------- */
+
+.nav-link-underline {
+  position: relative;
+}
+
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-gold);
+  transition: width var(--animation-duration-normal) var(--ease-out-expo),
+              left var(--animation-duration-normal) var(--ease-out-expo);
+}
+
+.nav-link-underline:hover::after,
+.nav-link-underline.active::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Mobile menu animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-menu {
+  animation: slideDown var(--animation-duration-normal) var(--ease-out-expo) forwards;
+}
+
+/* ----------------------------------------
+   Button & Interactive Hover Effects
+   ---------------------------------------- */
+
+.btn-primary {
+  transition:
+    background-color var(--animation-duration-fast) var(--ease-in-out),
+    transform var(--animation-duration-fast) var(--ease-out-expo),
+    box-shadow var(--animation-duration-normal) var(--ease-out-expo);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(229, 180, 91, 0.25);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* ----------------------------------------
+   Image Hover Effects
+   ---------------------------------------- */
+
+.image-hover-lift {
+  transition:
+    transform var(--animation-duration-normal) var(--ease-out-expo),
+    box-shadow var(--animation-duration-normal) var(--ease-out-expo);
+}
+
+.image-hover-lift:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(229, 180, 91, 0.2);
+}
+
+/* ----------------------------------------
+   Form Input Animations
+   ---------------------------------------- */
+
+.input-focus-glow {
+  transition:
+    border-color var(--animation-duration-fast) var(--ease-in-out),
+    box-shadow var(--animation-duration-normal) var(--ease-out-expo);
+}
+
+.input-focus-glow:focus {
+  box-shadow:
+    0 0 0 3px rgba(229, 180, 91, 0.15),
+    0 0 20px rgba(229, 180, 91, 0.1);
+}
+
+/* ----------------------------------------
+   Calendar Day Animations
+   ---------------------------------------- */
+
+@keyframes todayPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(229, 180, 91, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(229, 180, 91, 0);
+  }
+}
+
+.calendar-day-today {
+  animation: todayPulse 2s ease-in-out infinite;
+}
+
+/* ----------------------------------------
+   Service Card Animations
+   ---------------------------------------- */
+
+.service-card {
+  transition:
+    transform var(--animation-duration-normal) var(--ease-out-expo),
+    box-shadow var(--animation-duration-normal) var(--ease-out-expo);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(229, 180, 91, 0.15);
+}
+
+/* ----------------------------------------
+   Reduced Motion Support
+   ---------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

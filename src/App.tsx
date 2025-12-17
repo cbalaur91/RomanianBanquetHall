@@ -1,7 +1,6 @@
 import React from 'react';
 import { Menu, X, Phone, Mail, MapPin, Clock, ChevronDown, Facebook } from 'lucide-react';
-import { useState, useRef, FormEvent } from 'react';
-import emailjs from '@emailjs/browser';
+import { useState, useRef } from 'react';
 
 // =============================================
 // BOOKING MANAGEMENT
@@ -56,10 +55,37 @@ const MONTHS = [
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [formResult, setFormResult] = useState("");
   const messageRef = useRef<HTMLTextAreaElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
+
+  const scrollToSection = (e: React.MouseEvent, sectionId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFormResult("Sending...");
+    const formData = new FormData(event.currentTarget);
+    formData.append("access_key", "103b8fb5-f70f-426e-b2e2-461d8ef178de");
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+    if (data.success) {
+      setFormResult("Thank you! We'll contact you soon.");
+      event.currentTarget.reset();
+    } else {
+      setFormResult("Error sending message. Please try again.");
+    }
+  };
   
   const getDaysInMonth = (date: Date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -202,8 +228,9 @@ function App() {
           <div className="flex items-center justify-between h-20">
             <div className="flex-shrink-0" aria-label="Romanian Banquet Hall Logo">
               <h1 className="text-2xl font-serif">
-                <a 
-                  href="#home" 
+                <a
+                  href="#home"
+                  onClick={(e) => scrollToSection(e, 'home')}
                   className="hover:text-gold transition-colors cursor-pointer"
                   aria-label="Back to top"
                 >
@@ -215,11 +242,11 @@ function App() {
             {/* Desktop Menu */}
             <nav className="hidden md:block" aria-label="Main navigation">
               <div className="ml-10 flex items-center space-x-8">
-                <a href="#home" className="hover:text-gold transition-colors">Home</a>
-                <a href="#about" className="hover:text-gold transition-colors">About</a>
-                <a href="#gallery" className="hover:text-gold transition-colors">Gallery</a>
-                <a href="#services" className="hover:text-gold transition-colors">Services</a>
-                <a href="#contact" className="hover:text-gold transition-colors">Contact</a>
+                <a href="#home" onClick={(e) => scrollToSection(e, 'home')} className="hover:text-gold transition-colors">Home</a>
+                <a href="#about" onClick={(e) => scrollToSection(e, 'about')} className="hover:text-gold transition-colors">About</a>
+                <a href="#gallery" onClick={(e) => scrollToSection(e, 'gallery')} className="hover:text-gold transition-colors">Gallery</a>
+                <a href="#services" onClick={(e) => scrollToSection(e, 'services')} className="hover:text-gold transition-colors">Services</a>
+                <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="hover:text-gold transition-colors">Contact</a>
               </div>
             </nav>
 
@@ -241,11 +268,11 @@ function App() {
         {isMenuOpen && (
           <nav className="md:hidden bg-black/95" aria-label="Mobile navigation">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <a href="#home" className="block px-3 py-2 hover:bg-gray-800 rounded-md">Home</a>
-              <a href="#about" className="block px-3 py-2 hover:bg-gray-800 rounded-md">About</a>
-              <a href="#gallery" className="block px-3 py-2 hover:bg-gray-800 rounded-md">Gallery</a>
-              <a href="#services" className="block px-3 py-2 hover:bg-gray-800 rounded-md">Services</a>
-              <a href="#contact" className="block px-3 py-2 hover:bg-gray-800 rounded-md">Contact</a>
+              <a href="#home" onClick={(e) => scrollToSection(e, 'home')} className="block px-3 py-2 hover:bg-gray-800 rounded-md">Home</a>
+              <a href="#about" onClick={(e) => scrollToSection(e, 'about')} className="block px-3 py-2 hover:bg-gray-800 rounded-md">About</a>
+              <a href="#gallery" onClick={(e) => scrollToSection(e, 'gallery')} className="block px-3 py-2 hover:bg-gray-800 rounded-md">Gallery</a>
+              <a href="#services" onClick={(e) => scrollToSection(e, 'services')} className="block px-3 py-2 hover:bg-gray-800 rounded-md">Services</a>
+              <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="block px-3 py-2 hover:bg-gray-800 rounded-md">Contact</a>
             </div>
           </nav>
         )}
@@ -267,8 +294,9 @@ function App() {
           <div className="max-w-4xl mx-auto px-4">
             <h1 className="text-4xl md:text-6xl font-serif mb-6">Welcome to Romanian Banquet Hall</h1>
             <p className="text-xl md:text-2xl mb-8">Create unforgettable memories in our elegant venue</p>
-            <a 
+            <a
               href="#contact"
+              onClick={(e) => scrollToSection(e, 'contact')}
               className="inline-block bg-gold px-8 py-3 text-black font-semibold rounded-md hover:bg-gold/90 transition-colors"
             >
               Book Now
@@ -403,8 +431,9 @@ function App() {
             <p className="text-gray-300 mb-6">
               To book a date or check specific availability, please contact us directly.
             </p>
-            <a 
-              href="#contact" 
+            <a
+              href="#contact"
+              onClick={(e) => scrollToSection(e, 'contact')}
               className="inline-block bg-gold text-black px-8 py-3 rounded-md font-semibold hover:bg-gold/90 transition-colors"
             >
               Contact Us
@@ -488,39 +517,14 @@ function App() {
               </div>
             </div>
             <div>
-              <form 
-                ref={formRef}
+              <form
                 className="space-y-6"
-                onSubmit={async (e: FormEvent) => {
-                  e.preventDefault();
-                  if (!formRef.current) return;
-                  
-                  setIsSubmitting(true);
-                  setSubmitStatus('idle');
-                  
-                  try {
-                    await emailjs.sendForm(
-                      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-                      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-                      formRef.current,
-                      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-                    );
-                    setSubmitStatus('success');
-                   if (formRef.current) {
-                     formRef.current.reset();
-                   }
-                  } catch (error) {
-                    console.error('Failed to send email:', error);
-                    setSubmitStatus('error');
-                  } finally {
-                    setIsSubmitting(false);
-                  }
-                }}
+                onSubmit={onSubmit}
               >
                 <div>
                   <input
                     type="text"
-                    name="user_name"
+                    name="name"
                     placeholder="Your Name"
                     aria-label="Your Name"
                     required
@@ -530,18 +534,13 @@ function App() {
                 <div>
                   <input
                     type="email"
-                    name="user_email"
+                    name="email"
                     placeholder="Your Email"
                     aria-label="Your Email"
                     required
                     className="w-full px-4 py-2 bg-warmGray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-gold/80"
                   />
                 </div>
-               <input
-                 type="hidden"
-                 name="to_email"
-                 value="eventrbh@yahoo.com"
-               />
                 <div>
                   <textarea
                     name="message"
@@ -555,21 +554,14 @@ function App() {
                 </div>
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className={`w-full bg-gold text-black font-semibold py-2 px-4 rounded-md transition-colors ${
-                    isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gold/90'
-                  }`}
+                  disabled={formResult === "Sending..."}
+                  className="w-full bg-gold text-black font-semibold py-2 px-4 rounded-md transition-colors hover:bg-gold/90 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {formResult === "Sending..." ? "Sending..." : "Send Message"}
                 </button>
-                {submitStatus === 'success' && (
-                  <p className="text-green-500 text-center mt-2">
-                    Message sent successfully! We'll get back to you soon.
-                  </p>
-                )}
-                {submitStatus === 'error' && (
-                  <p className="text-red-500 text-center mt-2">
-                    Failed to send message. Please try again or email us directly.
+                {formResult && formResult !== "Sending..." && (
+                  <p className={`text-center ${formResult.includes("Error") ? "text-red-400" : "text-green-400"}`}>
+                    {formResult}
                   </p>
                 )}
               </form>

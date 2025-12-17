@@ -2,45 +2,142 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ========================================
+   CSS Custom Properties
+   ======================================== */
+
+:root {
+  /* Gold palette */
+  --color-gold-light: #F4D58D;
+  --color-gold: #E5B45B;
+  --color-gold-dark: #B8860B;
+  --color-gold-glow: rgba(229, 180, 91, 0.3);
+
+  /* Dark palette */
+  --color-dark-900: #0D0D0D;
+  --color-dark-800: #1C1917;
+  --color-dark-700: #292524;
+  --color-dark-600: #3D3A38;
+
+  /* Animation timing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ========================================
+   Base Styles
+   ======================================== */
+
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  
+
   body {
-    @apply bg-gray-900 text-white;
+    @apply bg-warmGray-900 text-white;
+  }
+
+  /* Improve focus visibility for accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-gold ring-offset-2 ring-offset-warmGray-900;
+  }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-gold/30 text-white;
   }
 }
 
+/* ========================================
+   Component Utilities
+   ======================================== */
+
 @layer components {
+  /* Color utilities (legacy support) */
   .text-gold {
-    color: #E5B45B;
-  }
-  
-  .bg-gold {
-    background-color: #E5B45B;
+    color: var(--color-gold);
   }
 
+  .bg-gold {
+    background-color: var(--color-gold);
+  }
+
+  /* Gradient backgrounds */
   .bg-gradient-warm {
-    background: linear-gradient(to right, #1C1917, #292524);
+    background: linear-gradient(135deg, #1C1917 0%, #292524 100%);
   }
 
   .bg-gradient-radial {
-    background: radial-gradient(circle at center, #292524, #1C1917);
+    background: radial-gradient(ellipse at center, #292524 0%, #1C1917 100%);
+  }
+
+  /* Subtle noise texture overlay */
+  .bg-noise {
+    position: relative;
+  }
+
+  .bg-noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-warmGray-900/80 backdrop-blur-md border border-white/5;
   }
 }
 
-.aspect-w-16 {
-  position: relative;
-  padding-bottom: 56.25%;
+/* ========================================
+   Aspect Ratio (for older browsers)
+   ======================================== */
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
 }
 
-.aspect-w-16 > * {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+@supports not (aspect-ratio: 16 / 9) {
+  .aspect-video {
+    position: relative;
+    padding-bottom: 56.25%;
+  }
+
+  .aspect-video > * {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* ========================================
+   Scrollbar Styling
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1C1917;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3D3A38;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4D4A48;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3D3A38 #1C1917;
 }
